@@ -1,3 +1,4 @@
+import { Header } from "@/components/general/Header";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -8,15 +9,15 @@ const inter = Inter({
 });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  console.log(children);
   return (
     <html>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "h-screen min-h-full bg-background bg-blue-900 font-sans antialiased",
           inter.variable
         )}
       >
+        <Header backgroundColor="bg-blue-600" />
         {children}
       </body>
     </html>
