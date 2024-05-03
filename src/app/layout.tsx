@@ -1,4 +1,4 @@
-import { Header } from "@/components/general/Header";
+import AuthLayout from "@/components/general/AuthLayout";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -17,8 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           inter.variable
         )}
       >
-        <Header backgroundColor="bg-blue-600" />
-        {children}
+        <AuthLayout>{children}</AuthLayout>
       </body>
     </html>
   );

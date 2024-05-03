@@ -1,4 +1,4 @@
-import Link from "next/link";
+"use client";
 
 export default function Home() {
   return (
@@ -9,9 +9,13 @@ export default function Home() {
           Meet the new standard for modern software development. Streamline
           issues, sprints, and product roadmaps.
         </div>
-        <Link href="/#">
-          <button className="bg-blue-600">Get started</button>
-        </Link>
+        <button
+          onClick={() => {
+            console.log("ToDo open auth modal");
+          }}
+        >
+          Get Started
+        </button>
       </div>
       <div className="">Illia Smolihovets 2024</div>
     </div>
