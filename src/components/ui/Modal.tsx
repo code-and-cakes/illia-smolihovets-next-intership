@@ -26,7 +26,7 @@ export default function Modal(props: ModalPropsType) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/25" />
+          <div className="fixed inset-0 bg-gray-800/80" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -40,18 +40,18 @@ export default function Modal(props: ModalPropsType) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="bg-linear-primary w-full max-w-md overflow-hidden rounded-2xl p-6 text-left align-middle shadow-2xl transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="text-lg font-medium leading-6 text-gray-200"
                 >
-                  Login to my accout
+                  {props.title}
                 </Dialog.Title>
                 {props.children}
                 <div className="mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={props.onAction}
                   >
                     {props.actionButtonTitle}

@@ -1,4 +1,4 @@
-import AuthLayout from "@/components/general/AuthLayout";
+import AuthLayout from "@/components/general/auth/AuthLayout";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html>
       <body
         className={cn(
-          "h-screen min-h-full bg-background bg-blue-900 font-sans antialiased",
+          "bg-linear-primary from-linear-secondary min-h-screen bg-gradient-to-b font-sans text-white antialiased",
           inter.variable
         )}
       >
