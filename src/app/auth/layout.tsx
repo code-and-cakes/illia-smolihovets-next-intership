@@ -1,7 +1,7 @@
 import AuthLayout from "@/components/general/auth/AuthLayout";
 import { cn } from "@/lib/utils";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html>
       <body
         className={cn(
-          "bg-linear-primary from-linear-secondary min-h-screen bg-gradient-to-b font-sans text-white antialiased",
+          "min-h-screen bg-linear-primary bg-gradient-to-b from-linear-secondary font-sans text-white antialiased",
           inter.variable
         )}
       >

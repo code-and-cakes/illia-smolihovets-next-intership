@@ -1,5 +1,3 @@
-"use client";
-
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 
@@ -40,7 +38,7 @@ export default function Modal(props: ModalPropsType) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="bg-linear-primary w-full max-w-md overflow-hidden rounded-2xl p-6 text-left align-middle shadow-2xl transition-all">
+              <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-gray-700 p-6 text-left align-middle shadow-2xl transition-all">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-200"

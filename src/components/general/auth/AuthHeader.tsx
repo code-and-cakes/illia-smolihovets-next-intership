@@ -8,9 +8,8 @@ type AuthHeaderPropsType = {};
 export function AuthHeader(props: AuthHeaderPropsType) {
   const { handleOpen } = useAuthModalContext();
   return (
-    //#272940
-    <div className="me-auto ms-auto flex flex-auto justify-around border-b border-gray-700 p-2">
-      <Link href="/" className="p-1 text-center">
+    <div className="fixed top-0 me-auto ms-auto flex w-full flex-auto justify-around border-b border-gray-700 p-2 backdrop-blur	">
+      <Link href="/project" className="p-1 text-center">
         Linear
       </Link>
       <button
