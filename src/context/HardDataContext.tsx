@@ -2,22 +2,23 @@
 
 import { createContext, useContext } from "react";
 
-// type HardDataContextType = {
-//   priority: number;
-//   status: number;
-//   description: string;
-//   startDate: Date;
-//   endDate: Date;
-//   assignTo: string;
-//   fromProject: string;
-// };
-
 type HardDataContextType = {
-  HardData: { priority: number; status: number; description: string };
+  projectName: string;
+  priority: number;
+  status: number;
+  description: string;
+  createDate: string;
+  updateDate: string;
+  assignTo: string;
+  id: number;
 };
 
-const HardDataContext = createContext<HardDataContextType>(
-  null as unknown as HardDataContextType
+type HardDataContextListType = {
+  hardDataArray: Array<HardDataContextType>;
+};
+
+const HardDataContext = createContext<HardDataContextListType>(
+  null as unknown as HardDataContextListType
 );
 
 export const HardDataContextProvider = ({
@@ -25,16 +26,31 @@ export const HardDataContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const HardData = {
-    1: {
+  const hardData = [
+    {
+      projectName: "test project",
       priority: 1,
       status: 3,
       description: "something",
+      createDate: "5 May",
+      updateDate: "8 May",
+      assignTo: "Illia Smolihovets",
+      id: 1,
     },
-  };
+    {
+      projectName: "test project 2",
+      priority: 2,
+      status: 4,
+      description: "more something",
+      createDate: "3 May",
+      updateDate: "7 May",
+      assignTo: "Moloda Vovchika",
+      id: 2,
+    },
+  ];
 
   return (
-    <HardDataContext.Provider value={HardData}>
+    <HardDataContext.Provider value={{ hardDataArray: hardData }}>
       {children}
     </HardDataContext.Provider>
   );

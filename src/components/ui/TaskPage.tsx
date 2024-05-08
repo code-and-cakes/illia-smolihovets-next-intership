@@ -5,5 +5,5 @@ type TaskPageProps = {
 };
 
 export default function TaskPage(props: TaskPageProps) {
-  return <div className="">{props.children}</div>;
+  return <div className="min-w-fit">{props.children}</div>;
 }
