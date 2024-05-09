@@ -11,7 +11,12 @@ const inter = Inter({
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className={cn("font-sans antialiased", inter.variable)}>
+      <body
+        className={cn(
+          "bg-linear-page font-sans text-sm antialiased",
+          inter.variable
+        )}
+      >
         <AppLayout>{children}</AppLayout>
       </body>
     </html>

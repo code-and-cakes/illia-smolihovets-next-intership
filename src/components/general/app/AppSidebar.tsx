@@ -1,18 +1,33 @@
 "use client";
 
+import SidebarProjectList from "@/components/general/app/SidebarProjectList";
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 export default function AppSidebar() {
   const router = useRouter();
   return (
-    <aside className="h-screen w-64">
-      <nav className="flex h-full flex-col border-r bg-white shadow-sm">
-        <div className="flex flex-col items-start justify-between p-4 pb-2">
-          <div>Menu</div>
-          <button onClick={() => router.push("/menu/project")}>
+    <aside className={cn("h-screen w-64 text-gray-200")}>
+      <nav>
+        <div className="flex flex-col items-start p-4 pb-2">
+          <div className="mb-8 mt-3">User name</div>
+          <button
+            className={cn(
+              "hover:bg-linear-hover-sidebar h-7 w-full rounded pl-2 text-left"
+            )}
+            onClick={() => console.log("dropdown menu")}
+          >
             All Projects
           </button>
-          <button onClick={() => router.push("/menu/issues")}>My issues</button>
+          <SidebarProjectList></SidebarProjectList>
+          <button
+            className={cn(
+              "hover:bg-linear-hover-sidebar mt-2 h-7 w-full rounded pl-2 text-left"
+            )}
+            onClick={() => router.push("/menu/issues")}
+          >
+            My issues
+          </button>
         </div>
       </nav>
     </aside>

@@ -1,19 +1,17 @@
 "use client";
 
-import TaskList from "@/components/general/app/TaskList";
+import TaskProjectList from "@/components/general/app/TaskProjectList";
 import TaskPage from "@/components/ui/TaskPage";
-import React from "react";
+import { cn } from "@/lib/utils";
 
-type AppProjectProps = {
-  children: React.ReactNode;
-};
-
-export default function AppProject() {
-  const pageType = "Project";
+export default function AppProject({ projectId }: { projectId: number }) {
   return (
     <TaskPage>
-      <div>Project page</div>
-      <TaskList></TaskList>
+      <div className="border-inherit py-3 pl-5">Project page</div>
+      <div className={cn("bg-linear-todo py-3 pl-5")}>Todo</div>
+      <TaskProjectList projectId={projectId}></TaskProjectList>
     </TaskPage>
   );
 }
+
+// AppProject and AppIssues using the same logic. Need to refactor it.
