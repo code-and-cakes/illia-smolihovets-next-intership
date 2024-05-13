@@ -1,7 +1,8 @@
 "use client";
 
 import { AuthHeader } from "@/components/general/auth/AuthHeader";
-import AuthModal from "@/components/general/auth/AuthModal";
+import LogInModal from "@/components/general/auth/LogInModal";
+import SignUpModal from "@/components/general/auth/SignUpModal";
 import { AuthModalContextProvider } from "@/context/AuthModalContext";
 import React from "react";
 
@@ -14,7 +15,8 @@ export default function AuthLayout(props: AuthLayoutProps) {
     <AuthModalContextProvider>
       <AuthHeader />
       {props.children}
-      <AuthModal />
+      <LogInModal />
+      <SignUpModal />
     </AuthModalContextProvider>
   );
 }

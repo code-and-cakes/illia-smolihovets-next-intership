@@ -3,7 +3,7 @@
 import { useAuthModalContext } from "@/context/AuthModalContext";
 
 export default function Home() {
-  const { handleOpen } = useAuthModalContext();
+  const { handleOpenLogin } = useAuthModalContext();
   return (
     <div className="flex h-screen flex-col justify-between text-center">
       <div className="me-auto ms-auto w-6/12">
@@ -17,7 +17,7 @@ export default function Home() {
           </div>
         </div>
         <button
-          onClick={handleOpen}
+          onClick={handleOpenLogin}
           className="h-12 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
         >
           Get Started {">"}
