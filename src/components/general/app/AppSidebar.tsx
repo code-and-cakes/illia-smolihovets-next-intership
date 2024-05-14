@@ -14,24 +14,32 @@ export default function AppSidebar() {
     router.refresh();
   };
 
-  const gerDataUser = async () => {
+  const getDataUser = async () => {
     try {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      console.log(user);
+      console.log(user?.id);
+      const { data: users_data } = await supabase
+        .from("users_data")
+        .select("*")
+        .eq("user_id", user?.id);
+      // const currentUser = users_data?.find(
+      //   (userData) => userData.user_id === user?.id
+      // );
+      console.log(users_data![0]);
     } catch (error) {}
   };
 
-  const checkTestFetch = async () => {
-    const { data, error } = await supabase.from("users_data").insert({
-      name: "Kateryna",
-      surname: "Mozgova",
-      user_id: "d465e712-f244-48ba-8fa3-cb10eaf4c07b",
-      email: "illiasmolihovets@gmail.com",
-    });
-    if (data) console.log(data);
-    if (error) console.log(error);
+  const getUserInfo = async () => {
+    try {
+      const { data: users_data, error } = await supabase
+        .from("users_data")
+        .select("*");
+      console.log(users_data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -40,8 +48,8 @@ export default function AppSidebar() {
         <div className="flex flex-col items-start p-4 pb-2">
           <div className="mb-8 mt-3">User name</div>
           <button onClick={logout}>Log Out</button>
-          <button onClick={gerDataUser}>Get Data User</button>
-          <button onClick={checkTestFetch}>Check Test Fetch</button>
+          <button onClick={getDataUser}>Get Data User</button>
+          <button onClick={getUserInfo}>Get All Users Info</button>
           <button
             className={cn(
               "h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"

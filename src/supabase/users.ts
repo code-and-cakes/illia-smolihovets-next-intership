@@ -31,8 +31,7 @@ export const userSignup = async (
     if (user) {
       console.log(user);
       await supabase.from("users_data").insert({
-        name: userName,
-        surname: userSurname,
+        full_name: `${userName} ${userSurname}`,
         user_id: user?.id,
         email,
       });
