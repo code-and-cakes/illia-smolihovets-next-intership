@@ -3,10 +3,14 @@
 import SidebarProjectList from "@/components/general/app/SidebarProjectList";
 import { cn } from "@/lib/utils";
 import { userLogout } from "@/supabase/users";
-import { supabase } from "@/utils/supabase";
 import { useRouter } from "next/navigation";
 
-export default function AppSidebar() {
+type AppSidebarProps = {
+  projects: any;
+  currentUser: any;
+};
+
+export default function AppSidebar(props: AppSidebarProps) {
   const router = useRouter();
 
   const logout = async () => {
@@ -14,56 +18,28 @@ export default function AppSidebar() {
     router.refresh();
   };
 
-  const getDataUser = async () => {
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      console.log(user?.id);
-      const { data: users_data } = await supabase
-        .from("users_data")
-        .select("*")
-        .eq("user_id", user?.id);
-      // const currentUser = users_data?.find(
-      //   (userData) => userData.user_id === user?.id
-      // );
-      console.log(users_data![0]);
-    } catch (error) {}
-  };
-
-  const getUserInfo = async () => {
-    try {
-      const { data: users_data, error } = await supabase
-        .from("users_data")
-        .select("*");
-      console.log(users_data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log(props.currentUser);
 
   return (
     <aside className={cn("h-screen w-64 text-gray-200")}>
       <nav>
         <div className="flex flex-col items-start p-4 pb-2">
-          <div className="mb-8 mt-3">User name</div>
+          <div className="mb-8 mt-3">{props.currentUser.full_name}</div>
           <button onClick={logout}>Log Out</button>
-          <button onClick={getDataUser}>Get Data User</button>
-          <button onClick={getUserInfo}>Get All Users Info</button>
           <button
             className={cn(
               "h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"
             )}
-            onClick={() => console.log("dropdown menu")}
+            // onClick={() => console.log("dropdown menu")}
           >
             All Projects
           </button>
-          <SidebarProjectList></SidebarProjectList>
+          <SidebarProjectList projects={props.projects} />
           <button
             className={cn(
               "mt-2 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"
             )}
-            onClick={() => router.push("/menu/issues")}
+            // onClick={() => router.push("/menu/issues")}
           >
             My issues
           </button>

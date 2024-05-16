@@ -1,41 +1,44 @@
 import ProjectComponent from "@/components/general/app/ProjectComponent";
-import { useHardDataContext } from "@/context/HardDataContext";
-import { supabase } from "@/utils/supabase";
 
-export default function SidebarProjectList() {
-  const hardData = useHardDataContext();
-  const getProjects = async () => {
-    try {
-      const { data: projects } = await supabase.from("projects").select("*");
-      return projects?.map((project) => {
-        console.log(project.project_name);
-        return (
-          <ProjectComponent
-            projectName={project.project_name}
-            key={project.project_id}
-            projectId={project.project_id}
-          />
-        );
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+type SidebarProjectListProps = {
+  projects: any;
+};
 
-  const projectList = hardData.hardDataArray.map((project) => {
+export default async function SidebarProjectList(
+  props: SidebarProjectListProps
+) {
+  // const hardData = useHardDataContext();
+  // const { projects, getProjects } = useProjectList();
+
+  // useEffect(() => {
+  //   getProjects();
+  // });
+
+  // const { data, error } = await supabase.from("projects").select("*");
+  // console.log(data);
+  // const projectList = hardData.hardDataArray.map((project) => {
+  //   return (
+  //     <ProjectComponent
+  //       projectName={project.projectName}
+  //       key={project.projectId}
+  //       projectId={project.projectId}
+  //     />
+  //   );
+  // });
+  const projectList = props.projects?.map((project: any) => {
     return (
       <ProjectComponent
-        projectName={project.projectName}
-        key={project.projectId}
-        projectId={project.projectId}
+        projectName={project.project_name}
+        key={project.project_id}
+        projectId={project.project_id}
       />
     );
   });
   return (
     <>
-      <button onClick={getProjects}>Get Projects Data</button>
+      {/* <button onClick={getProjects}>Get Projects Data</button> */}
       {projectList}
-      {/* {getProjects} */}
+      {/* {getProjectList} */}
     </>
   );
 }

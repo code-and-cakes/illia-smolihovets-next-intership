@@ -7,6 +7,7 @@ type TaskUserIssuesList = {
 
 export default function TaskUserList(props: TaskUserIssuesList) {
   const hardData = useHardDataContext();
+
   const userTaskList = hardData.hardDataArray.map((project) => {
     const projectArray = project.projectData.map((taskData) => {
       if (taskData.assignTo == props.userName) {

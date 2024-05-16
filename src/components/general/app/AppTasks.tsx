@@ -4,7 +4,7 @@ import TaskUserList from "@/components/general/app/TaskUserList";
 import TaskPage from "@/components/ui/TaskPage";
 import { cn } from "@/lib/utils";
 
-export default function AppIssues() {
+export default function AppTasks() {
   // let userName = "Illia Smolihovets";
   let userName = "Valeriy Tapilov";
   // let userName = "Moloda Vovchika";

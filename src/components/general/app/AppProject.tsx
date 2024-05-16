@@ -1,5 +1,3 @@
-"use client";
-
 import TaskProjectList from "@/components/general/app/TaskProjectList";
 import TaskPage from "@/components/ui/TaskPage";
 import { cn } from "@/lib/utils";
@@ -14,4 +12,4 @@ export default function AppProject({ projectId }: { projectId: number }) {
   );
 }
 
-// AppProject and AppIssues using the same logic. Need to refactor it.
+// AppProject and AppTasks using the same logic. Need to refactor it.

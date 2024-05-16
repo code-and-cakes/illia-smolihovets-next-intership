@@ -18,7 +18,7 @@ export default function TaskProjectList({ projectId }: { projectId: number }) {
         updateDate={project.updateDate}
         assignTo={project.assignTo}
         key={project.taskId}
-      ></TaskComponent>
+      />
     );
   });
 

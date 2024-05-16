@@ -1,20 +1,19 @@
-"use client";
-
 import AppSidebar from "@/components/general/app/AppSidebar";
-import { HardDataContextProvider } from "@/context/HardDataContext";
+import { getProjectsData } from "@/supabase/projects";
+import { getUserData } from "@/supabase/users";
 import React from "react";
 
 type AppLayoutProps = {
   children: React.ReactNode;
 };
 
-export default function AppLayout(props: AppLayoutProps) {
+export default async function AppLayout(props: AppLayoutProps) {
+  const projects = await getProjectsData();
+  const currentUser = await getUserData();
   return (
-    <HardDataContextProvider>
-      <div className="flex h-screen">
-        <AppSidebar></AppSidebar>
-        {props.children}
-      </div>
-    </HardDataContextProvider>
+    <div className="flex h-screen">
+      <AppSidebar currentUser={currentUser} projects={projects} />
+      {props.children}
+    </div>
   );
 }
