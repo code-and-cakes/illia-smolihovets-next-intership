@@ -1,30 +1,25 @@
 import TaskComponent from "@/components/ui/TaskComponent";
-import { useHardDataContext } from "@/context/HardDataContext";
 
-type TaskUserIssuesList = {
+type TaskUserListProps = {
   userName: string;
+  tasksList: any;
 };
 
-export default function TaskUserList(props: TaskUserIssuesList) {
-  const hardData = useHardDataContext();
-
-  const userTaskList = hardData.hardDataArray.map((project) => {
-    const projectArray = project.projectData.map((taskData) => {
-      if (taskData.assignTo == props.userName) {
-        return (
-          <TaskComponent
-            projectName={project.projectName}
-            priority={taskData.priority}
-            status={taskData.status}
-            description={taskData.description}
-            createDate={taskData.createDate}
-            updateDate={taskData.updateDate}
-            key={`project:${project.projectId}task:${taskData.taskId}`}
-          ></TaskComponent>
-        );
-      }
-    });
-    return projectArray;
+export default function TaskUserList(props: TaskUserListProps) {
+  const userTaskList = props.tasksList.map((task) => {
+    if (task.assign_to_user == props.userName) {
+      return (
+        <TaskComponent
+          projectName={task.assign_to_project}
+          priority={task.priority}
+          status={task.status}
+          description={task.task_name}
+          createDate={task.created_at}
+          updateDate={task.updated_at}
+          key={`task:${task.id}`}
+        ></TaskComponent>
+      );
+    }
   });
 
   return userTaskList;

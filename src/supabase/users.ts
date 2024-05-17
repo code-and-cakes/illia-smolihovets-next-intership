@@ -60,7 +60,7 @@ export const getUserData = async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    console.log(user);
+    // console.log(user);
     const { data: users_data } = await supabase
       .from("users_data")
       .select("*")
@@ -69,14 +69,14 @@ export const getUserData = async () => {
   } catch (error) {}
 };
 
-export const getUsersData = async () => {
-  const supabase = createSupabaseServerComponentClient();
-  try {
-    const { data: users_data, error } = await supabase
-      .from("users_data")
-      .select("*");
-    console.log(users_data);
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const getUsersData = async () => {
+//   const supabase = createSupabaseServerComponentClient();
+//   try {
+//     const { data: users_data, error } = await supabase
+//       .from("users_data")
+//       .select("*");
+//     console.log(users_data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

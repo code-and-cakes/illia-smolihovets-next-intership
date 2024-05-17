@@ -18,8 +18,6 @@ export default function AppSidebar(props: AppSidebarProps) {
     router.refresh();
   };
 
-  console.log(props.currentUser);
-
   return (
     <aside className={cn("h-screen w-64 text-gray-200")}>
       <nav>
@@ -39,7 +37,7 @@ export default function AppSidebar(props: AppSidebarProps) {
             className={cn(
               "mt-2 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"
             )}
-            // onClick={() => router.push("/menu/issues")}
+            onClick={() => router.push("/menu/tasks")}
           >
             My issues
           </button>

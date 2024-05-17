@@ -107,29 +107,6 @@ export const HardDataContextProvider = ({
     },
   ];
 
-  // const hardData = [
-  //   {
-  //     projectName: "test project",
-  //     priority: 1,
-  //     status: 3,
-  //     description: "something",
-  //     createDate: "5 May",
-  //     updateDate: "8 May",
-  //     assignTo: "Illia Smolihovets",
-  //     taskId: 1,
-  //   },
-  //   {
-  //     projectName: "test project 2",
-  //     priority: 2,
-  //     status: 4,
-  //     description: "more something",
-  //     createDate: "3 May",
-  //     updateDate: "7 May",
-  //     assignTo: "Moloda Vovchika",
-  //     taskId: 2,
-  //   },
-  // ];
-
   return (
     <HardDataContext.Provider value={{ hardDataArray: hardData }}>
       {children}

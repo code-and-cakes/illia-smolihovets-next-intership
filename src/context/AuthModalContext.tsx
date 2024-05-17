@@ -33,7 +33,7 @@ export const AuthModalContextProvider = ({
   };
 
   const handeActionLogin = () => {
-    console.log("action"); // потом тут пропишем логику входа
+    console.log("action");
   };
 
   const [openSignUp, setOpenSignUp] = useState(false);
@@ -47,7 +47,7 @@ export const AuthModalContextProvider = ({
   };
 
   const handeActionSignUp = () => {
-    console.log("action"); // потом тут пропишем логику входа
+    console.log("action");
   };
 
   return (

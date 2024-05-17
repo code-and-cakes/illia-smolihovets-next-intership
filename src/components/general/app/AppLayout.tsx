@@ -8,11 +8,12 @@ type AppLayoutProps = {
 };
 
 export default async function AppLayout(props: AppLayoutProps) {
-  const projects = await getProjectsData();
+  const projectsList = await getProjectsData();
   const currentUser = await getUserData();
+  // const tasksList = await getTasksData();
   return (
     <div className="flex h-screen">
-      <AppSidebar currentUser={currentUser} projects={projects} />
+      <AppSidebar currentUser={currentUser} projects={projectsList} />
       {props.children}
     </div>
   );

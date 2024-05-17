@@ -10,8 +10,6 @@ type TaskComponentProps = {
   assignTo?: string;
 };
 
-// Компоненты у нас будут немного отличаться в зависимости открыты у нас проекты либо ишшьюс. Как правильно реализовать эту логику?
-
 export default function TaskComponent(props: TaskComponentProps) {
   const priorityConverter = (priority: number) => {
     const priorityArray = ["N", "U", "H", "M", "L"];
@@ -37,7 +35,7 @@ export default function TaskComponent(props: TaskComponentProps) {
 
   return (
     <div
-      className={cn(" hover:bg-linear-hover-task h-9 border border-inherit")}
+      className={cn(" h-9 border border-inherit hover:bg-linear-hover-task")}
     >
       <div className="ml-4 flex flex-row pt-1">
         <input type="checkbox" className="mx-1 w-3"></input>

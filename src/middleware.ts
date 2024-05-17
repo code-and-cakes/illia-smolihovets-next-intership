@@ -11,11 +11,7 @@ export async function middleware(req: any) {
 
   if (!session) {
     return NextResponse.rewrite(new URL("/auth", req.url));
-  } else {
-    return NextResponse.rewrite(new URL("/menu", req.url));
   }
-
-  // return res;
 }
 
 export const config = {

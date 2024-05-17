@@ -1,18 +1,19 @@
-"use client";
-
+import TaskPage from "@/components/general/app/TaskPage";
 import TaskUserList from "@/components/general/app/TaskUserList";
-import TaskPage from "@/components/ui/TaskPage";
 import { cn } from "@/lib/utils";
+import { getTasksData } from "@/supabase/tasks";
+import { getUserData } from "@/supabase/users";
 
-export default function AppTasks() {
-  // let userName = "Illia Smolihovets";
-  let userName = "Valeriy Tapilov";
-  // let userName = "Moloda Vovchika";
+export default async function AppTasks() {
+  let currentUser = await getUserData();
+  const tasksList = await getTasksData();
+
+  console.log(currentUser);
   return (
     <TaskPage>
       <div className="border-inherit py-3 pl-5">Issues page</div>
       <div className={cn("bg-linear-todo py-3 pl-5")}>Todo</div>
-      <TaskUserList userName={userName}></TaskUserList>
+      <TaskUserList userName={currentUser.full_name} tasksList={tasksList} />
     </TaskPage>
   );
 }
