@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 type AppSidebarProps = {
   projects: any;
   currentUser: any;
+  userProjects: any;
 };
 
 export default function AppSidebar(props: AppSidebarProps) {
@@ -15,7 +16,7 @@ export default function AppSidebar(props: AppSidebarProps) {
 
   const logout = async () => {
     await userLogout();
-    router.refresh();
+    router.replace("/auth");
   };
 
   return (
@@ -32,14 +33,17 @@ export default function AppSidebar(props: AppSidebarProps) {
           >
             All Projects
           </button>
-          <SidebarProjectList projects={props.projects} />
+          <SidebarProjectList
+            projects={props.projects}
+            userProjects={props.userProjects}
+          />
           <button
             className={cn(
               "mt-2 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"
             )}
-            onClick={() => router.push("/menu/tasks")}
+            onClick={() => router.push("/projects/tasks")}
           >
-            My issues
+            My tasks
           </button>
         </div>
       </nav>

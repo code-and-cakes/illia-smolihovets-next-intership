@@ -1,6 +1,5 @@
 import TaskPage from "@/components/general/app/TaskPage";
 import TaskProjectList from "@/components/general/app/TaskProjectList";
-import { cn } from "@/lib/utils";
 import { getProjectsData } from "@/supabase/projects";
 import { getTasksData } from "@/supabase/tasks";
 import { getUserData } from "@/supabase/users";
@@ -18,7 +17,6 @@ export default async function AppProject({ projectId }: { projectId: number }) {
   return (
     <TaskPage>
       <div className="border-inherit py-3 pl-5">Project page</div>
-      <div className={cn("bg-linear-todo py-3 pl-5")}>Todo</div>
       <TaskProjectList
         tasksList={tasksList}
         projectsList={projectsList}

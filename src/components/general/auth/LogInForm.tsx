@@ -13,8 +13,10 @@ export default function LogInFormTest() {
   const { register, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data.email, data.password);
-    await userLogin(data.email, data.password);
-    router.refresh();
+    const { user } = await userLogin(data.email, data.password);
+    if (user) {
+      router.replace("/projects");
+    }
   };
 
   return (

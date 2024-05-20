@@ -11,6 +11,7 @@ export const userLogin = async (email: string, password: string) => {
     });
     if (dataUser) {
       console.log(dataUser);
+      return dataUser;
     }
   } catch (error) {
     console.log(error);
@@ -65,9 +66,42 @@ export const getUserData = async () => {
       .from("users_data")
       .select("*")
       .eq("user_id", user?.id);
+    // console.log(users_data![0]);
     return users_data![0];
   } catch (error) {}
 };
+
+export const getUserProjectsData = async () => {
+  const supabase = createSupabaseServerComponentClient();
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    // console.log(user);
+    const { data: users_data } = await supabase
+      .from("users_data")
+      .select("*")
+      .eq("user_id", user?.id);
+    const { data, error } = await supabase
+      .from("users_data")
+      .select(
+        `
+  id,
+  full_name,
+  projects ( project_id, project_name )
+`
+      )
+      .eq("user_id", user?.id);
+    // console.log(data![0].projects);
+    return data![0].projects;
+  } catch (error) {}
+};
+
+// const { data, error } = await supabase.from("teams").select(`
+//   id,
+//   team_name,
+//   users ( id, name )
+// `);
 
 // export const getUsersData = async () => {
 //   const supabase = createSupabaseServerComponentClient();

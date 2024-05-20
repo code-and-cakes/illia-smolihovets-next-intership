@@ -2,6 +2,7 @@ import ProjectComponent from "@/components/general/app/ProjectComponent";
 
 type SidebarProjectListProps = {
   projects: any;
+  userProjects: any;
 };
 
 export default async function SidebarProjectList(
