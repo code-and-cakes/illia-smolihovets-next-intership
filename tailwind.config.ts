@@ -23,6 +23,19 @@ const config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
+        linear: {
+          primary: "#000212",
+          secondary: "#191a34",
+          page: "#080808",
+          task: "#0f1011",
+          active: "#1b1c20",
+          border: "#1a1c21",
+          todo: "#17181a",
+          hover: {
+            task: "#141518",
+            sidebar: "#1b1c20",
+          },
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
