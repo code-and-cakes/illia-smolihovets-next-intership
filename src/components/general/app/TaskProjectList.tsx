@@ -21,19 +21,19 @@ type TaskDataProps = {
 
 type TaskProjectListProps = {
   projectId: number;
-  tasksList: any;
-  projectsList: any;
+  tasksList: Array<any> | null;
+  projectsList: Array<any> | null;
 };
 
 export default function TaskProjectList(props: TaskProjectListProps) {
-  const currentProject = props.projectsList.find(
+  const currentProject = props.projectsList?.find(
     (project) => project.project_id === Number(props.projectId)
   );
 
   const projectStatus = ["ToDo", "In Progress", "Done"];
 
   const projectTaskList = (status: string) =>
-    props.tasksList.map((task) => {
+    props.tasksList?.map((task) => {
       if (
         currentProject.project_name === task.assign_to_project &&
         task.status === status
@@ -48,6 +48,7 @@ export default function TaskProjectList(props: TaskProjectListProps) {
               assignTo={task.assign_to_user}
               key={task.id}
               taskId={task.id}
+              status={task.status}
             />
           </>
         );

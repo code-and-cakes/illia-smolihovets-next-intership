@@ -35,6 +35,11 @@ const config = {
             task: "#141518",
             sidebar: "#1b1c20",
           },
+          popover: {
+            primary: "#1b1c1f",
+            border: "#383b41",
+            hover: "#2c3039",
+          },
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

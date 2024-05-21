@@ -66,7 +66,7 @@ export const getUserData = async () => {
       .from("users_data")
       .select("*")
       .eq("user_id", user?.id);
-    // console.log(users_data![0]);
+    // console.log(users_data);
     return users_data![0];
   } catch (error) {}
 };
@@ -103,14 +103,14 @@ export const getUserProjectsData = async () => {
 //   users ( id, name )
 // `);
 
-// export const getUsersData = async () => {
-//   const supabase = createSupabaseServerComponentClient();
-//   try {
-//     const { data: users_data, error } = await supabase
-//       .from("users_data")
-//       .select("*");
-//     console.log(users_data);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const getUsersNames = async () => {
+  const supabase = createSupabaseServerComponentClient();
+  try {
+    const { data: users_data, error } = await supabase
+      .from("users_data")
+      .select("full_name");
+    console.log(users_data);
+  } catch (error) {
+    console.log(error);
+  }
+};

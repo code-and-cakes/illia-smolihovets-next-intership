@@ -7,7 +7,7 @@ interface IFormInput {
   password: string;
 }
 
-export default function LogInFormTest() {
+export default function LogInForm() {
   const router = useRouter();
 
   const { register, handleSubmit } = useForm<IFormInput>();

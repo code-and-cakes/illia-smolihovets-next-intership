@@ -8,8 +8,8 @@ type TaskUserListProps = {
 };
 
 export default function TaskUserList(props: TaskUserListProps) {
-  const userTasksList = (projectName) => {
-    return props.tasksList.map((task) => {
+  const userTasksList = (projectName: any) => {
+    return props.tasksList.map((task: any) => {
       if (
         task.assign_to_user == props.userName &&
         task.assign_to_project == projectName
@@ -30,7 +30,7 @@ export default function TaskUserList(props: TaskUserListProps) {
     });
   };
 
-  const projectsBar = props.userProjects.map((project) => {
+  const projectsBar = props.userProjects.map((project: any) => {
     return (
       <>
         <div
