@@ -1,5 +1,6 @@
 import TaskComponent from "@/components/ui/TaskComponent";
 import { cn } from "@/lib/utils";
+import React from "react";
 
 type TaskDataProps = {
   id: number;
@@ -33,19 +34,19 @@ export default function TaskProjectList(props: TaskProjectListProps) {
   const projectStatus = ["ToDo", "In Progress", "Done"];
 
   const projectTaskList = (status: string) =>
-    props.tasksList?.map((task) => {
+    props.tasksList?.reduce((acum, task) => {
       if (
-        currentProject.project_name === task.assign_to_project &&
+        currentProject.project_id === task.assign_to_project_id &&
         task.status === status
       ) {
-        return (
+        acum.push(
           <>
             <TaskComponent
               priority={task.priority}
               description={task.task_name}
               createDate={task.created_at}
               updateDate={task.updated_at}
-              assignTo={task.assign_to_user}
+              UserId={task.assign_to_user_id}
               key={task.id}
               taskId={task.id}
               status={task.status}
@@ -53,16 +54,23 @@ export default function TaskProjectList(props: TaskProjectListProps) {
           </>
         );
       }
-    });
+      return acum;
+    }, []);
 
-  const projectStatusList = projectStatus.map((status) => {
-    return (
-      <>
-        <div className={cn("bg-linear-todo py-3 pl-5")}>{status}</div>
-        {projectTaskList(status)}
-      </>
-    );
-  });
+  const projectStatusList = projectStatus.reduce(
+    (acum: React.ReactNode[], status) => {
+      if (projectTaskList(status).length) {
+        acum.push(
+          <>
+            <div className={cn("bg-linear-todo py-3 pl-5")}>{status}</div>
+            {projectTaskList(status)}
+          </>
+        );
+      }
+      return acum;
+    },
+    []
+  );
 
   return projectStatusList;
 }

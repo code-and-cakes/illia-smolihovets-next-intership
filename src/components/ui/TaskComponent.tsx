@@ -1,6 +1,7 @@
 "use client";
 
 import StatusPopover from "@/components/general/app/StatusPopover";
+import UsersPopover from "@/components/general/app/UsersPopover";
 import { cn } from "@/lib/utils";
 import {
   CheckCircleIcon,
@@ -11,13 +12,13 @@ import {
 import { useRouter } from "next/navigation";
 
 type TaskComponentProps = {
-  projectName?: string;
+  projectId?: string;
   priority: number;
   status?: string;
   description: string;
   createDate: string;
   updateDate: string;
-  assignTo?: string;
+  UserId?: number;
   taskId: number;
 };
 
@@ -71,20 +72,17 @@ export default function TaskComponent(props: TaskComponentProps) {
 
   return (
     <div
-      // onClick={() => router.push(`/projects/tasks/${props.taskId}`)}
+      onClick={() => router.push(`/projects/tasks/${props.taskId}`)}
       className={cn(" h-9 border border-inherit hover:bg-linear-hover-task")}
     >
       <div className="ml-4 flex flex-row pt-1">
         {/* <input type="checkbox" className="mx-1 w-3"></input> */}
         {/* <div className="m-1 w-3">{priorityConverter(props.priority)}</div> */}
-        {/* <div className="m-1">{statusConverter(props.status)}</div> */}
         <StatusPopover
           taskStatus={props.status}
           taskId={props.taskId}
           buttonIcon={statusConverter(props.status)}
-        >
-          {statusConverter(props.status)}
-        </StatusPopover>
+        />
         <div className="m-1 grow">{props.description}</div>
         <div className="m-1 flex items-center justify-center pb-1 text-xs text-gray-500">
           {dateConverter(props.createDate)}
@@ -93,9 +91,11 @@ export default function TaskComponent(props: TaskComponentProps) {
           {dateConverter(props.updateDate)}
         </div>
         <div className="m-1">
-          {userConverter(props.assignTo || "No Assignee")}
+          {/* {userConverter(props.assignTo || "No Assignee")}{" "} */}
+          {/* after refactoring get one to many user full name */}
         </div>
-        {/* <div className="m-1">{props.assignTo || "No Assignee"}</div> */}
+        <div className="m-1">{props.UserId || "0"}</div>
+        <UsersPopover />
       </div>
     </div>
   );

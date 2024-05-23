@@ -2,21 +2,18 @@ import TaskComponent from "@/components/ui/TaskComponent";
 import { cn } from "@/lib/utils";
 
 type TaskUserListProps = {
-  userName: string;
-  tasksList: any;
-  userProjects: any;
+  userProjectsData: any;
+  userTasksData: any;
 };
 
 export default function TaskUserList(props: TaskUserListProps) {
-  const userTasksList = (projectName: any) => {
-    return props.tasksList.map((task: any) => {
-      if (
-        task.assign_to_user == props.userName &&
-        task.assign_to_project == projectName
-      ) {
+  const userTasksList = (projectId) => {
+    return props.userTasksData.tasks.map((task: any) => {
+      if (projectId === task.assign_to_project_id) {
         return (
           <TaskComponent
-            projectName={task.assign_to_project}
+            UserId={task.assign_to_user_id}
+            projectId={task.assign_to_project_id}
             priority={task.priority}
             status={task.status}
             description={task.task_name}
@@ -30,7 +27,7 @@ export default function TaskUserList(props: TaskUserListProps) {
     });
   };
 
-  const projectsBar = props.userProjects.map((project: any) => {
+  const projectsBar = props.userProjectsData.projects.map((project: any) => {
     return (
       <>
         <div
@@ -39,7 +36,7 @@ export default function TaskUserList(props: TaskUserListProps) {
         >
           {project.project_name}
         </div>
-        {userTasksList(project.project_name)}
+        {userTasksList(project.project_id)}
       </>
     );
   });

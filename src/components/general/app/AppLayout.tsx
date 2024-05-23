@@ -1,10 +1,5 @@
 import AppSidebar from "@/components/general/app/AppSidebar";
-import { getProjectsData } from "@/supabase/projects";
-import {
-  getUserData,
-  getUserProjectsData,
-  getUsersNames,
-} from "@/supabase/users";
+import { GetUserProjectsData } from "@/supabase/users";
 import React from "react";
 
 type AppLayoutProps = {
@@ -12,18 +7,12 @@ type AppLayoutProps = {
 };
 
 export default async function AppLayout(props: AppLayoutProps) {
-  const projectsList = await getProjectsData();
-  const currentUser = await getUserData();
-  const userProjects = await getUserProjectsData();
-  const users = await getUsersNames();
+  const test = await GetUserProjectsData();
 
   return (
     <div className="flex h-screen">
-      <AppSidebar
-        userProjects={userProjects}
-        currentUser={currentUser}
-        projects={userProjects}
-      />
+      <AppSidebar userProjectsData={test} />
+      {/* <UserContextProvider users={getUsersNames()}> {props.children} <UserContextProvider /> -> do this */}
       {props.children}
     </div>
   );

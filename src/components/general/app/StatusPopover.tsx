@@ -1,65 +1,70 @@
-import PagePopover from "@/components/ui/PagePopover";
 import { cn } from "@/lib/utils";
 import { updateTaskStatus } from "@/supabase/tasks";
+import {
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  useClose,
+} from "@headlessui/react";
 import {
   CheckCircleIcon,
   PlayCircleIcon,
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 type StatusPopoverProps = {
   buttonIcon: any;
   taskStatus: string | undefined;
   taskId: number;
-  children: React.ReactNode;
 };
 
-export default function StatusPopover(props: StatusPopoverProps) {
+function StatusList({ taskId }: { taskId: number }) {
   const router = useRouter();
-  return (
-    <PagePopover buttonIcon={props.buttonIcon}>
-      <div className={cn("border-linear-popover-border border-b p-2")}>
-        Change Status
-      </div>
+  const statusArray = [
+    { status: "ToDo", icon: <PlusCircleIcon className="mr-2 size-5" /> },
+    { status: "In Progress", icon: <PlayCircleIcon className="mr-2 size-5" /> },
+    { status: "Done", icon: <CheckCircleIcon className="mr-2 size-5" /> },
+  ];
+  const close = useClose();
+  return statusArray.map((statusObj) => {
+    return (
       <button
-        onClick={async () => {
-          updateTaskStatus("ToDo", props.taskId);
+        onClick={async (event) => {
+          event.stopPropagation();
+          await updateTaskStatus(statusObj.status, taskId);
           close();
           router.refresh();
         }}
+        key={`${taskId}${statusObj.status}`}
         className={cn(
-          "hover:bg-linear-popover-hover m-1 flex p-2 hover:rounded-lg"
+          "m-1 flex p-2 hover:rounded-lg hover:bg-linear-popover-hover"
         )}
       >
-        <PlusCircleIcon className="mr-2 size-5" />
-        <span>ToDo</span>
+        {statusObj.icon}
+        <span>{statusObj.status}</span>
       </button>
-      <button
-        onClick={() => {
-          updateTaskStatus("In Progress", props.taskId);
-          router.refresh();
-        }}
+    );
+  });
+}
+
+export default function StatusPopover(props: StatusPopoverProps) {
+  return (
+    <Popover className="relative m-1">
+      <PopoverButton>{props.buttonIcon}</PopoverButton>
+      <PopoverPanel
         className={cn(
-          "hover:bg-linear-popover-hover m-1 flex p-2 hover:rounded-lg"
+          "fixed z-10 ml-1 rounded-md border border-linear-popover-border bg-linear-popover-primary text-white"
         )}
+        anchor="right start"
       >
-        <PlayCircleIcon className="mr-2 size-5" />
-        <span>In Progress</span>
-      </button>
-      <button
-        onClick={() => {
-          updateTaskStatus("Done", props.taskId);
-          router.refresh();
-        }}
-        className={cn(
-          "hover:bg-linear-popover-hover m-1 flex p-2 hover:rounded-lg"
-        )}
-      >
-        <CheckCircleIcon className="mr-2 size-5" />
-        <span>Done</span>
-      </button>
-    </PagePopover>
+        <div className="flex flex-col">
+          <div className={cn("border-b border-linear-popover-border p-2")}>
+            Change Status
+          </div>
+          <StatusList taskId={props.taskId} />
+        </div>
+      </PopoverPanel>
+    </Popover>
   );
 }

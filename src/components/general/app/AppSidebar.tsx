@@ -6,14 +6,11 @@ import { userLogout } from "@/supabase/users";
 import { useRouter } from "next/navigation";
 
 type AppSidebarProps = {
-  projects: any;
-  currentUser: any;
-  userProjects: any;
+  userProjectsData: any;
 };
 
 export default function AppSidebar(props: AppSidebarProps) {
   const router = useRouter();
-
   const logout = async () => {
     await userLogout();
     router.replace("/auth");
@@ -23,7 +20,7 @@ export default function AppSidebar(props: AppSidebarProps) {
     <aside className={cn("h-screen w-64 text-gray-200")}>
       <nav>
         <div className="flex flex-col items-start p-4 pb-2">
-          <div className="mb-8 mt-3">{props.currentUser.full_name}</div>
+          <div className="mb-8 mt-3">{props.userProjectsData.full_name}</div>
           <button onClick={logout}>Log Out</button>
           <button
             className={cn(
@@ -33,10 +30,7 @@ export default function AppSidebar(props: AppSidebarProps) {
           >
             All Projects
           </button>
-          <SidebarProjectList
-            projects={props.projects}
-            userProjects={props.userProjects}
-          />
+          <SidebarProjectList projects={props.userProjectsData.projects} />
           <button
             className={cn(
               "mt-2 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"

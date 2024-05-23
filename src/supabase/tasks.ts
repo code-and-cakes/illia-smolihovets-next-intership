@@ -3,8 +3,10 @@ import { createSupabaseServerComponentClient } from "@/utils/supabaseAppRouterCl
 
 export const getTasksData = async () => {
   const supabase = createSupabaseServerComponentClient();
-  const { data, error } = await supabase.from("tasks").select("*");
-  //   console.log(data);
+  const { data, error } = await supabase
+    .from("tasks")
+    .select("*, users_data (id, full_name)");
+  // console.log(data);
   return data;
 };
 
