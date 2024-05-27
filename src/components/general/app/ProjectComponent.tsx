@@ -13,7 +13,7 @@ export default function ProjectComponent(props: ProjectComponentProps) {
   return (
     <button
       className={cn(
-        "ml-3 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"
+        "my-px ml-3 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar focus:bg-linear-active"
       )}
       onClick={() => router.push(`/projects/${props.projectId}`)}
     >

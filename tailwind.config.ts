@@ -28,7 +28,7 @@ const config = {
           secondary: "#191a34",
           page: "#080808",
           task: "#0f1011",
-          active: "#1b1c20",
+          active: "#1c1f25",
           border: "#1a1c21",
           todo: "#17181a",
           hover: {
@@ -39,6 +39,7 @@ const config = {
             primary: "#1b1c1f",
             border: "#383b41",
             hover: "#2c3039",
+            active: "#24272f",
           },
         },
         border: "hsl(var(--border))",

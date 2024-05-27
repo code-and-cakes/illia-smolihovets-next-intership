@@ -1,5 +1,6 @@
 import TaskComponent from "@/components/ui/TaskComponent";
 import { cn } from "@/lib/utils";
+import { Project } from "@/supabase/projects";
 import React from "react";
 
 type TaskDataProps = {
@@ -21,24 +22,16 @@ type TaskDataProps = {
 // };
 
 type TaskProjectListProps = {
-  projectId: number;
-  tasksList: Array<any> | null;
-  projectsList: Array<any> | null;
+  projectData: Project;
 };
 
 export default function TaskProjectList(props: TaskProjectListProps) {
-  const currentProject = props.projectsList?.find(
-    (project) => project.project_id === Number(props.projectId)
-  );
-
   const projectStatus = ["ToDo", "In Progress", "Done"];
+  // console.log(props.projectData);
 
   const projectTaskList = (status: string) =>
-    props.tasksList?.reduce((acum, task) => {
-      if (
-        currentProject.project_id === task.assign_to_project_id &&
-        task.status === status
-      ) {
+    props.projectData.tasks.reduce((acum: React.ReactNode[], task: any) => {
+      if (task.status === status) {
         acum.push(
           <>
             <TaskComponent
@@ -46,10 +39,12 @@ export default function TaskProjectList(props: TaskProjectListProps) {
               description={task.task_name}
               createDate={task.created_at}
               updateDate={task.updated_at}
-              UserId={task.assign_to_user_id}
+              userId={task.assign_to_user_id}
               key={task.id}
               taskId={task.id}
               status={task.status}
+              assignedUsers={props.projectData.users_data}
+              withUsersPopover
             />
           </>
         );

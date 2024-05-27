@@ -33,7 +33,7 @@ export default function AppSidebar(props: AppSidebarProps) {
           <SidebarProjectList projects={props.userProjectsData.projects} />
           <button
             className={cn(
-              "mt-2 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"
+              "mt-2 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar focus:bg-linear-active"
             )}
             onClick={() => router.push("/projects/tasks")}
           >

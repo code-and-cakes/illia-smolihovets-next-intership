@@ -7,12 +7,12 @@ type TaskUserListProps = {
 };
 
 export default function TaskUserList(props: TaskUserListProps) {
-  const userTasksList = (projectId) => {
+  const userTasksList = (projectId: number) => {
     return props.userTasksData.tasks.map((task: any) => {
       if (projectId === task.assign_to_project_id) {
         return (
           <TaskComponent
-            UserId={task.assign_to_user_id}
+            userId={task.assign_to_user_id}
             projectId={task.assign_to_project_id}
             priority={task.priority}
             status={task.status}

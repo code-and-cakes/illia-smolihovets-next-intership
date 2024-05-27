@@ -7,7 +7,6 @@ import {
   CheckCircleIcon,
   PlayCircleIcon,
   PlusCircleIcon,
-  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
@@ -18,8 +17,10 @@ type TaskComponentProps = {
   description: string;
   createDate: string;
   updateDate: string;
-  UserId?: number;
+  userId: number;
   taskId: number;
+  assignedUsers?: any;
+  withUsersPopover?: boolean;
 };
 
 export default function TaskComponent(props: TaskComponentProps) {
@@ -64,9 +65,7 @@ export default function TaskComponent(props: TaskComponentProps) {
     return convertedDate;
   };
 
-  const userConverter = (userName: string | undefined) => {
-    return <UserCircleIcon className="size-5" />;
-  };
+  // console.log(props.assignedUsers);
 
   const router = useRouter();
 
@@ -94,8 +93,13 @@ export default function TaskComponent(props: TaskComponentProps) {
           {/* {userConverter(props.assignTo || "No Assignee")}{" "} */}
           {/* after refactoring get one to many user full name */}
         </div>
-        <div className="m-1">{props.UserId || "0"}</div>
-        <UsersPopover />
+        {props.withUsersPopover && (
+          <UsersPopover
+            userId={props.userId}
+            taskId={props.taskId}
+            assignedUsers={props.assignedUsers}
+          />
+        )}
       </div>
     </div>
   );

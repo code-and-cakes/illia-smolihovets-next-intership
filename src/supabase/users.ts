@@ -1,5 +1,17 @@
+import { Project } from "@/supabase/projects";
+import { Task } from "@/supabase/tasks";
 import { createSupabaseFrontendClient } from "@/utils/supabase";
 import { createSupabaseServerComponentClient } from "@/utils/supabaseAppRouterClient";
+
+export interface User {
+  id: number;
+  created_at: Date;
+  full_name: string;
+  email: string;
+  user_id: number;
+  projects: Array<Project>;
+  tasks: Array<Task>;
+}
 
 export const userLogin = async (email: string, password: string) => {
   const supabase = createSupabaseFrontendClient();
@@ -55,32 +67,12 @@ export const userLogout = async () => {
   }
 };
 
-export const getUserData = async () => {
-  const supabase = createSupabaseServerComponentClient();
-  try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    // console.log(user);
-    const { data: users_data } = await supabase
-      .from("users_data")
-      .select("*")
-      .eq("user_id", user?.id);
-    // console.log(users_data);
-    return users_data![0];
-  } catch (error) {}
-};
-
 export const getUserTaskData = async () => {
   const supabase = createSupabaseServerComponentClient();
   try {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const { data: users_data } = await supabase
-      .from("users_data")
-      .select("*")
-      .eq("user_id", user?.id); //not needed
     const { data, error } = await supabase
       .from("users_data")
       .select(
@@ -91,7 +83,7 @@ export const getUserTaskData = async () => {
 `
       )
       .eq("user_id", user?.id);
-    console.log(data![0]);
+    // console.log(data![0]);
     return data![0];
   } catch (error) {}
 };
@@ -103,17 +95,13 @@ export const GetUserProjectsData = async () => {
       data: { user },
     } = await supabase.auth.getUser();
     // console.log(user);
-    const { data: users_data } = await supabase
-      .from("users_data")
-      .select("*")
-      .eq("user_id", user?.id);
     const { data, error } = await supabase
       .from("users_data")
       .select(
         `
   id,
   full_name,
-  projects ( project_id, project_name)
+  projects (project_id, project_name)
 `
       )
       .eq("user_id", user?.id);
@@ -122,19 +110,14 @@ export const GetUserProjectsData = async () => {
   } catch (error) {}
 };
 
-// const { data, error } = await supabase.from("teams").select(`
-//   id,
-//   team_name,
-//   users ( id, name )
-// `);
-
 export const getUsersNames = async () => {
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = createSupabaseFrontendClient();
   try {
     const { data: users_data, error } = await supabase
       .from("users_data")
-      .select("full_name");
-    console.log(users_data);
+      .select("full_name, id");
+    // console.log(users_data);
+    return users_data;
   } catch (error) {
     console.log(error);
   }

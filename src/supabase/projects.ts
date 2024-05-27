@@ -1,17 +1,23 @@
+import { Task } from "@/supabase/tasks";
+import { User } from "@/supabase/users";
 import { createSupabaseServerComponentClient } from "@/utils/supabaseAppRouterClient";
 
-export const getProjectsData = async () => {
-  const supabase = createSupabaseServerComponentClient();
-  const { data, error } = await supabase.from("projects").select("*");
-  // console.log(data);
-  return data;
-};
+export interface Project {
+  project_id: number;
+  project_name: string;
+  created_at: Date;
+  users_data: Array<User>;
+  tasks: Array<Task>;
+}
 
-export const getProjectDataById = async () => {
+export const getProjectDataById = async (
+  projectId: number
+): Promise<Project | undefined> => {
   const supabase = createSupabaseServerComponentClient();
-  const { data } = await supabase
+  const { data }: { data: Project[] | null } = await supabase
     .from("projects")
-    .select("*, tasks(task_name)")
-    .eq("project_id", 1);
-  // console.log(data);
+    .select("*, tasks(*), users_data(full_name, id)")
+    .eq("project_id", projectId);
+  // console.log(data[0].users_data);
+  if (data) return data[0];
 };

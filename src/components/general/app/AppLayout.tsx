@@ -7,12 +7,11 @@ type AppLayoutProps = {
 };
 
 export default async function AppLayout(props: AppLayoutProps) {
-  const test = await GetUserProjectsData();
+  const userProjectsData = await GetUserProjectsData();
 
   return (
     <div className="flex h-screen">
-      <AppSidebar userProjectsData={test} />
-      {/* <UserContextProvider users={getUsersNames()}> {props.children} <UserContextProvider /> -> do this */}
+      <AppSidebar userProjectsData={userProjectsData} />
       {props.children}
     </div>
   );

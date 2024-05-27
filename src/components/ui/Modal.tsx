@@ -1,4 +1,10 @@
-import { Dialog, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import React, { Fragment } from "react";
 
 type ModalPropsType = {
@@ -15,7 +21,7 @@ export default function Modal(props: ModalPropsType) {
   return (
     <Transition appear show={props.open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={props.onClose}>
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
           enterFrom="opacity-0"
@@ -25,11 +31,11 @@ export default function Modal(props: ModalPropsType) {
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-gray-800/80" />
-        </Transition.Child>
+        </TransitionChild>
 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
@@ -38,13 +44,13 @@ export default function Modal(props: ModalPropsType) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-gray-700 p-6 text-left align-middle shadow-2xl transition-all">
-                <Dialog.Title
+              <DialogPanel className="w-full max-w-md overflow-hidden rounded-2xl bg-gray-700 p-6 text-left align-middle shadow-2xl transition-all">
+                <DialogTitle
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-200"
                 >
                   {props.title}
-                </Dialog.Title>
+                </DialogTitle>
                 {props.children}
                 {/* <div className="mt-4">
                   <button
@@ -55,8 +61,8 @@ export default function Modal(props: ModalPropsType) {
                     {props.actionButtonTitle}
                   </button>
                 </div> */}
-              </Dialog.Panel>
-            </Transition.Child>
+              </DialogPanel>
+            </TransitionChild>
           </div>
         </div>
       </Dialog>
