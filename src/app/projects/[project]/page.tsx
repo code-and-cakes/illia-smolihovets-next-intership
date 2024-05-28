@@ -1,7 +1,12 @@
 import AppProject from "@/components/general/app/AppProject";
+import { getProjectDataById } from "@/supabase/projects";
 
-export default function Project({ params }: { params: { project: number } }) {
-  // console.log(params.project);
+export default await async function Project({
+  params,
+}: {
+  params: { project: number };
+}) {
+  const projectData = await getProjectDataById(params.project);
 
-  return <AppProject projectId={params.project} />;
-}
+  return <AppProject projectData={projectData} />;
+};

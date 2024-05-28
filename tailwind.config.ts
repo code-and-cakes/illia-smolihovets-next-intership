@@ -29,8 +29,10 @@ const config = {
           page: "#080808",
           task: "#0f1011",
           active: "#1c1f25",
-          border: "#1a1c21",
+          border: "#23252a",
           todo: "#17181a",
+          scrollbar: "#5a5b5d",
+          button: "#6c78e6",
           hover: {
             task: "#141518",
             sidebar: "#1b1c20",
@@ -97,7 +99,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 } satisfies Config;
 
 export default config;

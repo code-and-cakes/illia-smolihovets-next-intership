@@ -1,6 +1,8 @@
+"use client";
+
 import TaskPage from "@/components/general/app/TaskPage";
 import TaskProjectList from "@/components/general/app/TaskProjectList";
-import { getProjectDataById } from "@/supabase/projects";
+import { useRouter } from "next/navigation";
 
 // type AppProjectProps = {
 //   projectId: number;
@@ -8,16 +10,22 @@ import { getProjectDataById } from "@/supabase/projects";
 //   tasksList: any;
 // };
 
-export default async function AppProject({ projectId }: { projectId: number }) {
-  const projectData = await getProjectDataById(projectId);
+export default function AppProject({ projectData }: { projectData: any }) {
+  const router = useRouter();
+
   return (
     <TaskPage>
-      <div className="border-inherit py-3 pl-5">Project page</div>
+      <div className="flex justify-between border-inherit px-5 py-3">
+        <div>Project page</div>
+        <button
+          onClick={() =>
+            router.push(`/projects/${projectData.project_id}/edit`)
+          }
+        >
+          Edit Project
+        </button>
+      </div>
       {projectData && <TaskProjectList projectData={projectData} />}
     </TaskPage>
   );
 }
-
-//// get 1 project by id with assigned users_data and its tasks
-
-// AppProject and AppTasks using the same logic. Need to refactor it.

@@ -111,13 +111,10 @@ export const GetUserProjectsData = async () => {
 };
 
 export const getUsersNames = async () => {
-  const supabase = createSupabaseFrontendClient();
+  const supabase = createSupabaseServerComponentClient();
   try {
-    const { data: users_data, error } = await supabase
-      .from("users_data")
-      .select("full_name, id");
-    // console.log(users_data);
-    return users_data;
+    const { data } = await supabase.from("users_data").select("*");
+    return data;
   } catch (error) {
     console.log(error);
   }

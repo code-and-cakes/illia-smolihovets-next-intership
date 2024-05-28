@@ -10,11 +10,10 @@ import React, { Fragment } from "react";
 type ModalPropsType = {
   children: React.ReactNode;
   className?: string;
-  actionButtonTitle: string;
   title: string;
   open: boolean;
   onClose: () => void;
-  onAction: () => void;
+  // onAction: () => void;
 };
 
 export default function Modal(props: ModalPropsType) {

@@ -2,41 +2,60 @@
 
 import TaskPage from "@/components/general/app/TaskPage";
 import { cn } from "@/lib/utils";
-import { Task } from "@/supabase/tasks";
-import { Textarea } from "@headlessui/react";
+import { Task, updateTaskContent } from "@/supabase/tasks";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type TaskContentProps = {
   taskId: number;
-  taskContent?: Task;
+  taskContent: Task;
 };
-
-type taskDescriptionProps = {
-  taskDescription: string | undefined;
-};
-
-// function TaskTextArea({ taskDescription }: taskDescriptionProps) {
-//   const [editContent, setEditcontent] = useState(false);
-//   const handleChange = (taskDescription: string | undefined) => {
-//     console.log(taskDescription);
-//     return taskDescription;
-//   };
-
-//   return (
-//     <Textarea disabled={false} className={cn("w-full bg-inherit p-5")}>
-//       {handleChange(taskDescription)}
-//     </Textarea>
-//   );
-// }
 
 export default function TaskContent(props: TaskContentProps) {
+  const router = useRouter();
+
   const [editContent, setEditContent] = useState(true);
+  const [postContent, setPostContent] = useState(props.taskContent?.task_data);
 
   const handleOpenContent = () => {
-    setEditContent(false);
+    setEditContent(!editContent);
   };
 
-  console.log(props.taskContent?.task_data);
+  const handleSetContent = (value: string) => {
+    setPostContent(value);
+  };
+
+  const updateContent = () => {
+    updateTaskContent(postContent, props.taskId);
+    handleOpenContent();
+    router.refresh();
+  };
+
+  const cancelContent = () => {
+    const currentValue = postContent;
+    setPostContent(currentValue);
+    handleOpenContent();
+  };
+
+  const saveEditButton = () => {
+    if (editContent) {
+      return <div>Edit</div>;
+    } else
+      return (
+        <>
+          <div
+            onClick={() => {
+              cancelContent();
+            }}
+          >
+            Cancel
+          </div>
+          <div className="ml-8" onClick={() => updateContent()}>
+            Save
+          </div>
+        </>
+      );
+  };
 
   return (
     <TaskPage>
@@ -48,13 +67,19 @@ export default function TaskContent(props: TaskContentProps) {
           onClick={() => {
             handleOpenContent();
           }}
+          className="flex flex-row"
         >
-          Edit
+          {saveEditButton()}
         </div>
       </div>
-      <Textarea disabled={editContent} className={cn("w-full bg-inherit p-5")}>
-        {props.taskContent?.task_data}
-      </Textarea>
+      <textarea
+        disabled={editContent}
+        className={cn(
+          "scrollbar-thumb-linear-scrollbar scrollbar-w-1 scrollbar w-full flex-1 resize-none bg-inherit p-5 focus:outline-none"
+        )}
+        value={postContent}
+        onChange={(e) => handleSetContent(e.target.value)}
+      />
     </TaskPage>
   );
 }

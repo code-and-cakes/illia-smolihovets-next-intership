@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 type TaskComponentProps = {
   projectId?: string;
   priority: number;
-  status?: string;
+  status: string;
   description: string;
   createDate: string;
   updateDate: string;
@@ -72,7 +72,7 @@ export default function TaskComponent(props: TaskComponentProps) {
   return (
     <div
       onClick={() => router.push(`/projects/tasks/${props.taskId}`)}
-      className={cn(" h-9 border border-inherit hover:bg-linear-hover-task")}
+      className={cn("h-9 border border-inherit hover:bg-linear-hover-task")}
     >
       <div className="ml-4 flex flex-row pt-1">
         {/* <input type="checkbox" className="mx-1 w-3"></input> */}
@@ -89,10 +89,7 @@ export default function TaskComponent(props: TaskComponentProps) {
         <div className="m-1 flex items-center justify-center pb-1 text-xs text-gray-500">
           {dateConverter(props.updateDate)}
         </div>
-        <div className="m-1">
-          {/* {userConverter(props.assignTo || "No Assignee")}{" "} */}
-          {/* after refactoring get one to many user full name */}
-        </div>
+        <div className="m-1"></div>
         {props.withUsersPopover && (
           <UsersPopover
             userId={props.userId}

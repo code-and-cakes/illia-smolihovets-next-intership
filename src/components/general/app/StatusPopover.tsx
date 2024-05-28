@@ -50,7 +50,7 @@ function StatusList({ taskId, onChange, status }: StatusListProps) {
         }}
         key={`${taskId}${statusObj.status}`}
         className={cn(
-          isActive && "bg-linear-popover-active rounded-lg",
+          isActive && "rounded-lg bg-linear-popover-active",
           "m-1 flex p-2 hover:rounded-lg hover:bg-linear-popover-hover"
         )}
       >

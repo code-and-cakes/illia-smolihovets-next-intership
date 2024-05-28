@@ -8,10 +8,9 @@ export default function SignUpModal() {
   return (
     <Modal
       title="Create new account"
-      actionButtonTitle="Sign Up"
       open={openSignUp}
       onClose={handleCloseSignUp}
-      onAction={handeActionSignUp}
+      // onAction={handeActionSignUp}
     >
       <SignUpForm />
     </Modal>

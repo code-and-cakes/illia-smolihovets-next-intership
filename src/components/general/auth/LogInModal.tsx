@@ -8,10 +8,9 @@ export default function LogInModal() {
   return (
     <Modal
       title="Login to your account"
-      actionButtonTitle="Log In"
       open={openLogin}
       onClose={handleCloseLogin}
-      onAction={handeActionLogin}
+      // onAction={handeActionLogin}
     >
       <LogInForm />
     </Modal>

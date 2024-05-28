@@ -1,5 +1,6 @@
 import { Task } from "@/supabase/tasks";
 import { User } from "@/supabase/users";
+import { createSupabaseFrontendClient } from "@/utils/supabase";
 import { createSupabaseServerComponentClient } from "@/utils/supabaseAppRouterClient";
 
 export interface Project {
@@ -20,4 +21,15 @@ export const getProjectDataById = async (
     .eq("project_id", projectId);
   // console.log(data[0].users_data);
   if (data) return data[0];
+};
+
+export const updateProjectName = async (
+  projectName: string,
+  projectId: number
+) => {
+  const supabase = createSupabaseFrontendClient();
+  const { data } = await supabase
+    .from("projects")
+    .update({ project_name: projectName })
+    .eq("project_id", projectId);
 };

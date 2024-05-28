@@ -28,6 +28,11 @@ export const getTaskContent = async (
   if (data) return data[0];
 };
 
+export const updateTaskContent = async (content: string, taskId: number) => {
+  const supabase = createSupabaseFrontendClient();
+  await supabase.from("tasks").update({ task_data: content }).eq("id", taskId);
+};
+
 export const updateTaskStatus = async (
   statusUpdate: string,
   taskId: number
