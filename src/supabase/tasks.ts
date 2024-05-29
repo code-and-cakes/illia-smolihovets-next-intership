@@ -54,3 +54,23 @@ export const updateTaskAssignedUser = async (
     .update({ assign_to_user_id: userId })
     .eq("id", taskId);
 };
+
+export const createTask = async (
+  taskName: string,
+  taskTitle: string,
+  userId: number,
+  projectId: number
+) => {
+  const supabase = createSupabaseFrontendClient();
+  await supabase.from("tasks").insert([
+    {
+      task_name: taskName,
+      task_data: taskTitle,
+      assign_to_user_id: userId,
+      assign_to_project_id: projectId,
+    },
+  ]);
+  // await supabase
+  //   .from("users_projects")
+  //   .insert([{ user_id: userId, project_id: projectId }]);
+};

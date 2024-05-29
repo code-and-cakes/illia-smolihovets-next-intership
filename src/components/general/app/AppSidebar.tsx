@@ -22,6 +22,9 @@ export default function AppSidebar(props: AppSidebarProps) {
         <div className="flex flex-col items-start p-4 pb-2">
           <div className="mb-8 mt-3">{props.userProjectsData.full_name}</div>
           <button onClick={logout}>Log Out</button>
+          <button onClick={() => router.push(`/projects/create_project`)}>
+            Create new project
+          </button>
           <button
             className={cn(
               "h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"

@@ -32,7 +32,10 @@ const config = {
           border: "#23252a",
           todo: "#17181a",
           scrollbar: "#5a5b5d",
-          button: "#6c78e6",
+          button: {
+            primary: "#6c78e6",
+            secondary: "#fe6665",
+          },
           hover: {
             task: "#141518",
             sidebar: "#1b1c20",

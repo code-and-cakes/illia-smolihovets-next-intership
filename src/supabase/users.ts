@@ -119,3 +119,16 @@ export const getUsersNames = async () => {
     console.log(error);
   }
 };
+
+export const getCurrentUser = async () => {
+  const supabase = createSupabaseServerComponentClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data } = await supabase
+    .from("users_data")
+    .select("id")
+    .eq("user_id", user?.id);
+  // console.log(data![0].id);
+  return data![0].id;
+};

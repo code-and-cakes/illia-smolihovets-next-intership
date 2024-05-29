@@ -33,3 +33,40 @@ export const updateProjectName = async (
     .update({ project_name: projectName })
     .eq("project_id", projectId);
 };
+
+export const assignUserToProject = async (
+  projectId: number,
+  userId: number
+) => {
+  const supabase = createSupabaseFrontendClient();
+  const { data } = await supabase
+    .from("users_projects")
+    .insert([{ project_id: projectId, user_id: userId }])
+    .select();
+  console.log(data);
+};
+
+export const unassignUserToProject = async (
+  projectId: number,
+  userId: number
+) => {
+  const supabase = createSupabaseFrontendClient();
+  const { data } = await supabase
+    .from("users_projects")
+    .delete()
+    .eq("project_id", projectId)
+    .eq("user_id", userId);
+  console.log(data);
+};
+
+export const createProject = async (userId: number, projectName: string) => {
+  const supabase = createSupabaseFrontendClient();
+  const { data } = await supabase
+    .from("projects")
+    .insert([{ project_name: projectName }])
+    .select();
+  console.log(data);
+  await supabase
+    .from("users_projects")
+    .insert([{ project_id: data![0].project_id, user_id: userId }]);
+};
