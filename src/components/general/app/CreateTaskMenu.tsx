@@ -24,6 +24,7 @@ export default function CreateTaskMenu(props: CreateTaskMenuProps) {
     // console.log(props.userId);
     createTask(data.taskName, data.taskTitle, props.userId, props.projectId);
     router.push(`/projects/${props.projectId}`);
+    router.refresh();
   };
 
   return (
@@ -39,7 +40,7 @@ export default function CreateTaskMenu(props: CreateTaskMenuProps) {
           <div className="mb-2">Task name</div>
           <input
             className={cn(
-              "mb-7 w-fit rounded border border-linear-popover-border bg-inherit p-1 outline-none focus:border-linear-button"
+              "focus:border-linear-button mb-7 w-fit rounded border border-linear-popover-border bg-inherit p-1 outline-none"
             )}
             placeholder="New Task"
             {...register("taskName")}

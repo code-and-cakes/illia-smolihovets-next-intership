@@ -32,7 +32,7 @@ export default function TaskContent(props: TaskContentProps) {
   };
 
   const cancelContent = () => {
-    const currentValue = postContent;
+    const currentValue = props.taskContent?.task_data;
     setPostContent(currentValue);
     handleOpenContent();
   };
@@ -75,7 +75,7 @@ export default function TaskContent(props: TaskContentProps) {
       <textarea
         disabled={editContent}
         className={cn(
-          "scrollbar-thumb-linear-scrollbar scrollbar-w-1 scrollbar w-full flex-1 resize-none bg-inherit p-5 focus:outline-none"
+          "w-full flex-1 resize-none bg-inherit p-5 scrollbar scrollbar-thumb-linear-scrollbar scrollbar-w-1 focus:outline-none"
         )}
         value={postContent}
         onChange={(e) => handleSetContent(e.target.value)}

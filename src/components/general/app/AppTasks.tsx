@@ -7,7 +7,7 @@ export default async function AppTasks() {
   const userTasksData = await getUserTaskData();
   return (
     <TaskPage>
-      <div className="border-inherit py-3 pl-5">Task page</div>
+      <div className="bg-linear-task py-3 pl-5">Task page</div>
       <TaskUserList
         userProjectsData={userProjectsData}
         userTasksData={userTasksData}

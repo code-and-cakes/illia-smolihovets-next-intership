@@ -1,4 +1,5 @@
 // import { userSignup } from "@/supabase/users";
+import { userSignup } from "@/supabase/users";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -15,8 +16,8 @@ export default function SignUpForm() {
   const { register, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data.email, data.password);
-    // await userSignup(data.email, data.password, data.name, data.surname);
-    // router.refresh();
+    await userSignup(data.email, data.password, data.name, data.surname);
+    router.replace("/projects/tasks");
   };
 
   return (

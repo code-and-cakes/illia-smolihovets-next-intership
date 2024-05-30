@@ -15,7 +15,7 @@ export default function LogInForm() {
     console.log(data.email, data.password);
     const { user } = await userLogin(data.email, data.password);
     if (user) {
-      router.replace("/projects");
+      router.replace("/projects/tasks");
     }
   };
 

@@ -8,37 +8,44 @@ type TaskUserListProps = {
 
 export default function TaskUserList(props: TaskUserListProps) {
   const userTasksList = (projectId: number) => {
-    return props.userTasksData.tasks.map((task: any) => {
-      if (projectId === task.assign_to_project_id) {
-        return (
-          <TaskComponent
-            userId={task.assign_to_user_id}
-            projectId={task.assign_to_project_id}
-            priority={task.priority}
-            status={task.status}
-            description={task.task_name}
-            createDate={task.created_at}
-            updateDate={task.updated_at}
-            key={`task:${task.id}`}
-            taskId={task.id}
-          ></TaskComponent>
-        );
-      }
-    });
+    return props.userTasksData.tasks.reduce(
+      (acum: React.ReactNode[], task: any) => {
+        if (projectId === task.assign_to_project_id) {
+          acum.push(
+            <TaskComponent
+              userId={task.assign_to_user_id}
+              projectId={task.assign_to_project_id}
+              priority={task.priority}
+              status={task.status}
+              description={task.task_name}
+              createDate={task.created_at}
+              updateDate={task.updated_at}
+              key={`task:${task.id}`}
+              taskId={task.id}
+            ></TaskComponent>
+          );
+        }
+        return acum;
+      },
+      []
+    );
   };
 
   const projectsBar = props.userProjectsData.projects.map((project: any) => {
-    return (
-      <>
-        <div
-          key={project.project_id}
-          className={cn("bg-linear-todo py-3 pl-5")}
-        >
-          {project.project_name}
-        </div>
-        {userTasksList(project.project_id)}
-      </>
-    );
+    console.log(userTasksList(project.project_id));
+    if (userTasksList(project.project_id).length) {
+      return (
+        <>
+          <div
+            key={project.project_id}
+            className={cn("bg-linear-todo py-3 pl-5")}
+          >
+            {project.project_name}
+          </div>
+          {userTasksList(project.project_id)}
+        </>
+      );
+    }
   });
 
   return projectsBar;

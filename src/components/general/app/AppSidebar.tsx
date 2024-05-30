@@ -1,8 +1,8 @@
 "use client";
 
-import SidebarProjectList from "@/components/general/app/SidebarProjectList";
+import ComoboxProjects from "@/components/general/app/ComoboxProjects";
+import SidebarUserPopover from "@/components/general/app/SidebarUserPopover";
 import { cn } from "@/lib/utils";
-import { userLogout } from "@/supabase/users";
 import { useRouter } from "next/navigation";
 
 type AppSidebarProps = {
@@ -11,29 +11,14 @@ type AppSidebarProps = {
 
 export default function AppSidebar(props: AppSidebarProps) {
   const router = useRouter();
-  const logout = async () => {
-    await userLogout();
-    router.replace("/auth");
-  };
 
   return (
     <aside className={cn("h-screen w-64 text-gray-200")}>
       <nav>
-        <div className="flex flex-col items-start p-4 pb-2">
-          <div className="mb-8 mt-3">{props.userProjectsData.full_name}</div>
-          <button onClick={logout}>Log Out</button>
-          <button onClick={() => router.push(`/projects/create_project`)}>
-            Create new project
-          </button>
-          <button
-            className={cn(
-              "h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar"
-            )}
-            // onClick={() => console.log("dropdown menu")}
-          >
-            All Projects
-          </button>
-          <SidebarProjectList projects={props.userProjectsData.projects} />
+        <div className="flex flex-col items-start p-2">
+          <SidebarUserPopover fullName={props.userProjectsData.full_name} />
+          <ComoboxProjects projects={props.userProjectsData.projects} />
+          {/* <SidebarProjectList projects={props.userProjectsData.projects} /> */}
           <button
             className={cn(
               "mt-2 h-7 w-full rounded pl-2 text-left hover:bg-linear-hover-sidebar focus:bg-linear-active"
